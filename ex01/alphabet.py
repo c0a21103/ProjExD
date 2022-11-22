@@ -54,5 +54,4 @@ if __name__ == "__main__":
             print("全問正解おめでとう！")
             break
     ed = datetime.datetime.now()
-    print(f"実行時間：{(ed-st).seconds:.2f}sec")
-        
+    print(f"実行時間：{(ed-st).seconds:.2f}Sec")
