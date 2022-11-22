@@ -1,3 +1,4 @@
+import datetime
 import random
 
 
@@ -7,12 +8,14 @@ def shutudai():
     return que["a"]
 
 def kaitou(ans_lst):
+    st = datetime.datetime.now()
     ans = input("解答：")
+    ed = datetime.datetime.now()
     if ans in ans_lst:
         print("正解！")
     else:
         print("不正解...")
-    
+    print(f"解答時間：{(ed-st).seconds}sec")
     
 
 if __name__ == "__main__":
