@@ -44,6 +44,8 @@ entry = tk.Entry(root,justify="right",width=20,font=("",20))
 entry.insert(tk.END,"0")
 entry.grid(row=0,column=0,columnspan=4,sticky=tk.EW)
 r,c = 2,2
+
+# 各数字ボタン
 for num in range(9,-1,-1):
     if num != 0:
         button = tk.Button(root,text=f"{num}",width=4,height=2,font=("",30))
@@ -58,13 +60,17 @@ for num in range(9,-1,-1):
         r += 1
         c = 2
 
+# 小数点ボタン
 button = tk.Button(root,text=".",width=4,height=2,font=("",30))
 button.bind("<1>",button_click)
 button.grid(row = r,column = 1)
+
+#百分率表示ボタン
 button = tk.Button(root,text="%",width=4,height=2,font=("",30))
 button.bind("<1>",button_click)
 button.grid(row = r,column = 2)
 
+# クリア、オールクリア、+/-の変更ボタン
 lst = ["C","AC","+/-"]
 r,c = 1,0
 for x in lst:
@@ -76,6 +82,7 @@ for x in lst:
         r += 1
         c = 2
 
+# 四則演算と計算結果表示ボタン
 entity = ["=","+","-","×","÷"]
 r = 5
 for ent in entity:
