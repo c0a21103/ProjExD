@@ -16,7 +16,7 @@ for i in range(9,-1,-1):
     button.bind("<1>",button_click)
     button.grid(row = r,column = c)
     c += 1
-    if c % 3 == 0:
+    if c == 3:
         r += 1
         c = 0
 
