@@ -16,13 +16,22 @@ def make_maze(yoko, tate):
             else:
                 rnd = random.randint(0, 3)
             maze_lst[x+YP[rnd]][y+XP[rnd]] = 1
+    maze_lst[1][1] = 2
+    maze_lst[yoko-2][tate-2] = 3
     return maze_lst
 
 def show_maze(canvas, maze_lst):
-    color = ["white", "gray"]
+    color = ["white", "gray","green","red"]
     for x in range(len(maze_lst)):
         for y in range(len(maze_lst[x])):
-            canvas.create_rectangle(x*100, y*100, x*100+100, y*100+100, fill=color[maze_lst[x][y]])
+            if maze_lst[x][y] == 0:
+                canvas.create_rectangle(x*100, y*100, x*100+100, y*100+100, fill=color[0])
+            elif maze_lst[x][y] == 1:
+                canvas.create_rectangle(x*100, y*100, x*100+100, y*100+100, fill=color[1])
+            elif maze_lst[x][y] == 2:
+                canvas.create_rectangle(x*100, y*100, x*100+100, y*100+100, fill=color[2])
+            elif maze_lst[x][y] == 3:
+                canvas.create_rectangle(x*100, y*100, x*100+100, y*100+100, fill=color[3])
 
 #2次元リストを渡すとCUIで迷路を表示
 def print_maze(maze_lst):
@@ -31,6 +40,10 @@ def print_maze(maze_lst):
         for j in i:
             if j == 1:
                 j = "■"
+            elif j == 2:
+                j = "S"
+            elif j == 3:
+                j = "G"
             else:
                 j = "□"
             print(j,end="")

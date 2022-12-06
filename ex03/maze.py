@@ -1,4 +1,5 @@
 import tkinter as tk
+import random
 import maze_maker
 
 
@@ -12,19 +13,36 @@ def key_up(event):
     key = ""
     
 def main_proc():
-    global cx, cy, mx, my
-    if key == "Up": my -= 1
-    if key == "Down": my += 1
-    if key == "Left": mx -= 1
-    if key == "Right": mx += 1
+    global cx, cy, mx, my, tori1, tori2
+    if key == "Up":
+        my -= 1
+    if key == "Down":
+        my += 1
+    if key == "Left":
+        mx -= 1
+        canvas.delete("kokaton")
+        canvas.create_image(cx, cy, image=tori1, tag="kokaton")
+    if key == "Right":
+        mx += 1
+        canvas.delete("kokaton")
+        canvas.create_image(cx, cy, image=tori2, tag="kokaton")
     if maze_lst[mx][my] == 1:
-        if key == "Up": my += 1
-        if key == "Down": my -= 1
-        if key == "Left": mx += 1
-        if key == "Right": mx -= 1
+        if key == "Up":
+            my += 1
+        if key == "Down": 
+            my -= 1
+        if key == "Left": 
+            mx += 1
+            canvas.delete("kokaton")
+            canvas.create_image(cx, cy, image=tori1, tag="kokaton")
+        if key == "Right":
+            mx -= 1
+            canvas.delete("kokaton")
+            canvas.create_image(cx, cy, image=tori2, tag="kokaton")
+
     cx, cy = mx*100+50, my*100+50
     canvas.coords("kokaton", cx, cy)
-    root.after(500,main_proc)
+    root.after(300,main_proc)
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -35,8 +53,9 @@ if __name__ == "__main__":
     maze_maker.show_maze(canvas,maze_lst)
     mx, my = 1, 1
     cx, cy = mx*100+50, my*100+50
-    tori = tk.PhotoImage(file="ex03/fig/4.png")
-    canvas.create_image(cx, cy, image=tori, tag="kokaton")
+    tori1 = tk.PhotoImage(file="ex03/fig/5.png")
+    tori2 = tk.PhotoImage(file="ex03/fig/2.png")
+    canvas.create_image(cx, cy, image=tori1, tag="kokaton")
     key = ""
     root.bind("<KeyPress>", key_down)
     root.bind("<KeyRelease>", key_up)
