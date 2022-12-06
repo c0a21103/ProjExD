@@ -26,6 +26,14 @@ def main_proc():
         mx += 1
         canvas.delete("kokaton")
         canvas.create_image(cx, cy, image=tori2, tag="kokaton")
+        
+    if key == "r":
+        canvas.delete("kokaton")
+        canvas.create_image(cx, cy, image=tori2, tag="kokaton")
+    if key == "l":
+        canvas.delete("kokaton")
+        canvas.create_image(cx, cy, image=tori1, tag="kokaton")
+        
     if maze_lst[mx][my] == 1:
         if key == "Up":
             my += 1
