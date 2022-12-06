@@ -6,7 +6,6 @@ import maze_maker
 def key_down(event):
     global key
     key = event.keysym
-    
 
 def key_up(event):
     global key
