@@ -5,15 +5,16 @@ import random
 
 def check_bound(obj_rct,scr_rct):
     yoko, tate = +1, +1
-    if obj_rct.left < scr_rct.left or obj_rct.right < scr_rct.right:
+    if obj_rct.left < scr_rct.left or scr_rct.right < obj_rct.right:
         yoko = -1
-    if obj_rct.top < scr_rct.top or obj_rct.bottom < scr_rct.bottom:
+    if obj_rct.top < scr_rct.top or scr_rct.bottom < obj_rct.bottom:
         tate = -1
     return yoko,tate
 
 
-def main():
+def main():        
     clock = pg.time.Clock()
+    vx, vy = +1, +1
     pg.display.set_caption("逃げろ！こうかとん")
     scrn_sfc = pg.display.set_mode((1600,900))
     scrn_rct = scrn_sfc.get_rect()
@@ -27,12 +28,12 @@ def main():
     
     bomb_sfc = pg.Surface((20,20))
     bomb_sfc.set_colorkey((0, 0, 0))
-    pg.draw.circle(bomb_sfc, (255,0,0),(10,10),10)
+    pg.draw.circle(bomb_sfc, (255,0,0),(10,10),size)
     bomb_rct = bomb_sfc.get_rect()
     bomb_rct.centerx = random.randint(0, scrn_rct.width)
     bomb_rct.centery = random.randint(0, scrn_rct.height)
     
-    vx, vy = +1, +1
+    
     
     while True:
         scrn_sfc.blit(bg_sfc,bg_rct)
@@ -67,7 +68,7 @@ def main():
         vx *= yoko
         vy *= tate
         
-        if tori_rct.collidedict(bomb_rct):
+        if tori_rct.colliderect(bomb_rct):
             return
         
         pg.display.update()
