@@ -79,9 +79,11 @@ def main():
     cnt = 0
     time_cnt = 10
     
+    # 文字フォントの設定
     fonto = pg.font.Font(None,100)
     fonto.set_bold
     
+    # 表示する文字の設定
     gc_txt = fonto.render("GAME CLEAR!", True, (255,0,0))
     go_txt = fonto.render("GAME OVER...", True, (255,0,0))
     
@@ -91,6 +93,7 @@ def main():
     kkt = Bird("ex05/fig/6.png", 2.0, (900,400))
     kkt.update(scr)
     
+    # 爆弾の初期個数の設定
     bombs = []
     colors = ["red","blue","yellow","green"]
     for color in colors:
@@ -101,6 +104,8 @@ def main():
     while True:        
         scr.blit()
         cnt += 1
+        
+        # 時間制限の追加
         t_txt = fonto.render(f"Remaining Time:{time_cnt}", True, (255,0,0))
         scr.sfc.blit(t_txt,(0,0))
         
@@ -110,8 +115,11 @@ def main():
 
         kkt.update(scr)
         
+        # 1秒に一回実行
         if cnt % 500 == 1:
             time_cnt -= 1
+            
+            # 60%の確率で爆弾追加
             if random.randint(1,5) <= 3:
                 vx = random.choice([-1, +1])
                 vy = random.choice([-1, +1])
@@ -119,15 +127,19 @@ def main():
         
         for bkd in bombs:
             bkd.update(scr)
+            
+            # 爆弾の処理判定
             if kkt.rct.colliderect(bkd.rct):
                 bombs.remove(bkd)
             
+            # 爆弾がすべて処理された時
             if len(bombs) == 0:
                 scr.sfc.blit(gc_txt,(550,400))
                 pg.display.update()
                 pg.time.wait(500)
                 return
         
+        # 時間切れ
         if time_cnt == 0:
             scr.sfc.blit(go_txt,(550,400))
             pg.time.wait(500)
