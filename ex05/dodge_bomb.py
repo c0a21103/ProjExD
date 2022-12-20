@@ -83,10 +83,10 @@ def main():
     clock =pg.time.Clock()
 
     # 練習１
-    scr = Screen("逃げろ！こうかとん", (1600,900), "fig/pg_bg.jpg")
+    scr = Screen("逃げろ！こうかとん", (1600,900), "ex05/fig/pg_bg.jpg")
 
     # 練習３
-    kkt = Bird("fig/6.png", 2.0, (900,400))
+    kkt = Bird("ex05/fig/6.png", 2.0, (900,400))
     kkt.update(scr)
 
     # 練習５
