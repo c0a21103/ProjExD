@@ -2,7 +2,7 @@ import pygame as pg
 import random
 import sys
 
-
+# スクリーンの表示用クラス
 class Screen:
     def __init__(self, title, wh, img_path):
         pg.display.set_caption(title) 
@@ -15,6 +15,7 @@ class Screen:
         self.sfc.blit(self.bgi_sfc, self.bgi_rct) 
 
 
+# こうかとんの表示用クラス
 class Bird:
     key_delta = {
         pg.K_UP:    [0, -1],
@@ -44,6 +45,7 @@ class Bird:
         self.blit(scr)                    
 
 
+# 爆弾の表示用クラス
 class Bomb:
     def __init__(self, color, rad, vxy, scr:Screen):
         self.sfc = pg.Surface((2*rad, 2*rad))
@@ -64,7 +66,7 @@ class Bomb:
         self.vy *= tate
         self.blit(scr)
 
-
+# 壁にぶつかったかどうか
 def check_bound(obj_rct, scr_rct):
     yoko, tate = +1, +1
     if obj_rct.left < scr_rct.left or scr_rct.right < obj_rct.right:
@@ -87,9 +89,10 @@ def main():
     gc_txt = fonto.render("GAME CLEAR!", True, (255,0,0))
     go_txt = fonto.render("GAME OVER...", True, (255,0,0))
     
-
+    # タイトルの設定
     scr = Screen("負けるな！こうかとん", (1600,900), "ex05/fig/pg_bg.jpg")
     
+    # こうかとんの初期設定
     kkt = Bird("ex05/fig/6.png", 2.0, (900,400))
     kkt.update(scr)
     
