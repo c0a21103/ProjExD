@@ -77,11 +77,13 @@ def check_bound(obj_rct, scr_rct):
 def main():
     clock =pg.time.Clock()
     cnt = 0
+    time_cnt = 10
     
     fonto = pg.font.Font(None,100)
     fonto.set_bold
     
-    txt = fonto.render("GAME CLEAR!", True, (255,0,0))
+    gc_txt = fonto.render("GAME CLEAR!", True, (255,0,0))
+    go_txt = fonto.render("GAME OVER...", True, (255,0,0))
     
 
     scr = Screen("負けるな！こうかとん", (1600,900), "ex05/fig/pg_bg.jpg")
@@ -99,14 +101,17 @@ def main():
     while True:        
         scr.blit()
         cnt += 1
-            
+        t_txt = fonto.render(f"Remaining Time:{time_cnt}", True, (255,0,0))
+        scr.sfc.blit(t_txt,(0,0))
+        
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
 
         kkt.update(scr)
         
-        if cnt % 1000 == 1:
+        if cnt % 500 == 1:
+            time_cnt -= 1
             if random.randint(1,5) <= 3:
                 vx = random.choice([-1, +1])
                 vy = random.choice([-1, +1])
@@ -118,13 +123,18 @@ def main():
                 bombs.remove(bkd)
             
             if len(bombs) == 0:
-                scr.sfc.blit(txt,(550,400))
+                scr.sfc.blit(gc_txt,(550,400))
                 pg.display.update()
-                pg.time.wait(1000)
+                pg.time.wait(500)
                 return
+        
+        if time_cnt == 0:
+            scr.sfc.blit(go_txt,(550,400))
+            pg.time.wait(500)
+            return
 
         pg.display.update()
-        clock.tick(1000)
+        clock.tick(500)
 
 
 if __name__ == "__main__":
