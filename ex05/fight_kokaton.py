@@ -145,6 +145,7 @@ def main():
         # 時間切れ
         if time_cnt == 0:
             scr.sfc.blit(go_txt,(550,400))
+            pg.display.update()
             pg.time.wait(500)
             return
 
